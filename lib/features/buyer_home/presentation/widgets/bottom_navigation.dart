@@ -7,6 +7,9 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: 0,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Theme.of(context).primaryColor,
+      unselectedItemColor: Colors.grey,
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
