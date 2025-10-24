@@ -26,7 +26,7 @@ class MarketCard extends StatelessWidget {
               children: [
                 Text(
                   market.name,
-                  style: Theme.of(context).textTheme.headline6,
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 8),
                 Text(market.description),

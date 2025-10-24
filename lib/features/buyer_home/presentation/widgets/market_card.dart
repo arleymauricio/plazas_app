@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MarketCard extends StatelessWidget {
   final String image;
@@ -28,15 +29,12 @@ class MarketCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
+                Text(title, style: Theme.of(context).textTheme.titleLarge),
                 const SizedBox(height: 8.0),
                 Text(description),
                 const SizedBox(height: 8.0),
                 TextButton(
-                  onPressed: () => Navigator.pushNamed(context, route),
+                  onPressed: () => context.go(route),
                   child: Text(actionLink),
                 ),
               ],
