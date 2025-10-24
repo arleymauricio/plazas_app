@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "628240924231-0q4a46p1r4rqfbqbmolb2jt3sfifkm50.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.amdp.firefly.plazas",
+            "certificate_hash": "475c095ba7d270318db645ea7678c0786f77e9c2"
+          }
+        },
+        {
           "client_id": "628240924231-b41mtnlbhnhlm4sqd4oglg8b9p6sufi0.apps.googleusercontent.com",
           "client_type": 3
         }
