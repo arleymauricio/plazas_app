@@ -1,5 +1,6 @@
+import 'package:equatable/equatable.dart';
 
-class BuyerProfileEntity {
+class BuyerProfileEntity extends Equatable {
   final String email;
   final String role;
   final String address;
@@ -7,7 +8,7 @@ class BuyerProfileEntity {
   final String gender;
   final DateTime birthDate;
 
-  BuyerProfileEntity({
+  const BuyerProfileEntity({
     required this.email,
     required this.role,
     required this.address,
@@ -15,4 +16,7 @@ class BuyerProfileEntity {
     required this.gender,
     required this.birthDate,
   });
+
+  @override
+  List<Object?> get props => [email, role, address, phone, gender, birthDate];
 }

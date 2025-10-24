@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:logger/logger.dart';
 import 'package:myapp/features/auth/data/auth_service.dart';
+import 'package:myapp/features/buyer_registration/domain/usecases/get_buyer_profile_use_case.dart';
+import 'package:myapp/features/buyer_registration/presentation/screens/buyer_registration_screen.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 enum UserRole { buyer, seller, recolector, delivery }
@@ -14,18 +16,49 @@ final loginIsLoadingProvider = StateProvider<bool>((ref) => false);
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});
 
-  void _signInWithGoogle(BuildContext context, WidgetRef ref) async {
+  void _signInWithGoogle(
+    BuildContext context,
+    WidgetRef ref,
+    UserRole role,
+  ) async {
     final logger = Logger();
-    logger.i('Attempting to sign in with Google...');
+    logger.i('Attempting to sign in with Google as role: ${role.name}');
     ref.read(loginIsLoadingProvider.notifier).state = true;
 
     try {
       final authService = ref.read(authServiceProvider);
       final userCredential = await authService.signInWithGoogle();
+      if (userCredential.user != null) {
+        final getBuyerProfile = ref.read(getBuyerProfileUseCaseProvider);
+        final buyerProfile = await getBuyerProfile.execute(
+          userCredential.user!.email!,
+        );
+        if (buyerProfile != null) {
+          logger.i('Buyer Profile Found:');
+          logger.i('  Email: ${buyerProfile.email}');
+          logger.i('  Role: ${buyerProfile.role}');
+          logger.i('  Address: ${buyerProfile.address}');
+          logger.i('  Phone: ${buyerProfile.phone}');
+          logger.i('  Gender: ${buyerProfile.gender}');
+          logger.i('  Birth Date: ${buyerProfile.birthDate}');
+        } else {
+          logger.w(
+            'No buyer profile found for email: ${userCredential.user!.email!}',
+          );
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BuyerRegistrationScreen(
+                email: userCredential.user!.email!,
+                role: role.name,
+              ),
+            ),
+          );
+        }
+      }
       logger.i(
-        'Google Sign-In successful for user: ${userCredential.user?.email}',
+        'Google Sign-In process completed for user: ${userCredential.user?.email}',
       );
-      // The router will automatically redirect if sign-in is successful
     } catch (e) {
       logger.e('Google Sign-In failed', e);
       ScaffoldMessenger.of(context).showSnackBar(
@@ -162,7 +195,11 @@ class _LoginViewState extends State<LoginView> {
                             Buttons.google,
                             onPressed: () {
                               if (!isLoading) {
-                                LoginScreen()._signInWithGoogle(context, ref);
+                                const LoginScreen()._signInWithGoogle(
+                                  context,
+                                  ref,
+                                  _selectedRole,
+                                );
                               }
                             },
                             shape: RoundedRectangleBorder(
