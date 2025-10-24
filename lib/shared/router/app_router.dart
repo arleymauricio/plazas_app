@@ -24,20 +24,24 @@ final routerProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const BuyerHomePage(),
       ),
       GoRoute(
+        path: '/buyer-registration',
+        builder: (context, state) {
+          final extra = state.extra as Map<String, String>;
+          return BuyerRegistrationScreen(
+            email: extra['email']!,
+            role: extra['role']!,
+          );
+        },
+      ),
+      GoRoute(
         path: '/markets',
-        builder: (context, state) => const Scaffold(
-          body: Center(
-            child: Text('Markets'),
-          ),
-        ),
+        builder: (context, state) =>
+            const Scaffold(body: Center(child: Text('Markets'))),
       ),
       GoRoute(
         path: '/entrepreneurs',
-        builder: (context, state) => const Scaffold(
-          body: Center(
-            child: Text('Entrepreneurs'),
-          ),
-        ),
+        builder: (context, state) =>
+            const Scaffold(body: Center(child: Text('Entrepreneurs'))),
       ),
     ],
   );

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-import 'widgets/custom_app_bar.dart';
-import 'widgets/market_card.dart';
-import 'widgets/bottom_navigation.dart';
+import 'package:myapp/features/buyer_home/presentation/widgets/bottom_navigation.dart';
+import 'package:myapp/features/buyer_home/presentation/widgets/custom_app_bar.dart';
+import 'package:myapp/features/buyer_home/presentation/widgets/market_card.dart';
 
 class BuyerHomePage extends StatelessWidget {
   const BuyerHomePage({super.key});
@@ -31,14 +30,16 @@ class BuyerHomePage extends StatelessWidget {
               const MarketCard(
                 image: 'https://i.imgur.com/t4YdYqs.jpeg',
                 title: 'Compra en Plazas de Mercado',
-                description: 'Encuentra productos frescos, variados y de la mejor calidad directamente del campo.',
+                description:
+                    'Encuentra productos frescos, variados y de la mejor calidad directamente del campo.',
                 actionLink: 'Explorar Plazas →',
                 route: '/markets',
               ),
               const MarketCard(
                 image: 'https://i.imgur.com/P0jgxN0.jpeg',
                 title: 'Compra en Emprendedores',
-                description: 'Apoya el talento local y descubre productos únicos artesanales y llenos de historia.',
+                description:
+                    'Apoya el talento local y descubre productos únicos artesanales y llenos de historia.',
                 actionLink: 'Explorar Emprendedores →',
                 route: '/entrepreneurs',
               ),

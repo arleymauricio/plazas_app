@@ -6,7 +6,9 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:logger/logger.dart';
 import 'package:myapp/features/auth/data/auth_service.dart';
 import 'package:myapp/features/buyer_registration/domain/usecases/get_buyer_profile_use_case.dart';
+import 'package:go_router/go_router.dart';
 import 'package:myapp/features/buyer_registration/presentation/screens/buyer_registration_screen.dart';
+import 'package:myapp/features/buyer_home/presentation/screens/buyer_home_page.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 enum UserRole { buyer, seller, recolector, delivery }
@@ -34,25 +36,15 @@ class LoginScreen extends ConsumerWidget {
           userCredential.user!.email!,
         );
         if (buyerProfile != null) {
-          logger.i('Buyer Profile Found:');
-          logger.i('  Email: ${buyerProfile.email}');
-          logger.i('  Role: ${buyerProfile.role}');
-          logger.i('  Address: ${buyerProfile.address}');
-          logger.i('  Phone: ${buyerProfile.phone}');
-          logger.i('  Gender: ${buyerProfile.gender}');
-          logger.i('  Birth Date: ${buyerProfile.birthDate}');
+          logger.i('Buyer Profile Found: Navigating to Home Page');
+          context.go('/buyer-home');
         } else {
           logger.w(
             'No buyer profile found for email: ${userCredential.user!.email!}',
           );
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BuyerRegistrationScreen(
-                email: userCredential.user!.email!,
-                role: role.name,
-              ),
-            ),
+          context.go(
+            '/buyer-registration',
+            extra: {'email': userCredential.user!.email!, 'role': role.name},
           );
         }
       }
