@@ -21,8 +21,10 @@ class LoginScreen extends ConsumerWidget {
 
     try {
       final authService = ref.read(authServiceProvider);
-      await authService.signInWithGoogle();
-      logger.i('Google Sign-In successful.');
+      final userCredential = await authService.signInWithGoogle();
+      logger.i(
+        'Google Sign-In successful for user: ${userCredential.user?.email}',
+      );
       // The router will automatically redirect if sign-in is successful
     } catch (e) {
       logger.e('Google Sign-In failed', e);
