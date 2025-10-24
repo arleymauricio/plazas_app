@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "628240924231",
+    "project_id": "plazas-project",
+    "storage_bucket": "plazas-project.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628240924231:android:9f227851576fcb385cbb62",
+        "android_client_info": {
+          "package_name": "com.amdp.firefly.plazas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628240924231-b41mtnlbhnhlm4sqd4oglg8b9p6sufi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8mJ8QviylsYZPDejcC3Z0MheWAOadnPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628240924231-b41mtnlbhnhlm4sqd4oglg8b9p6sufi0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "628240924231-e9ae1k0qbslr40vuh0mqc0q4sa4e7731.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.myapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
